@@ -1,0 +1,11 @@
+server:
+  port: 8083
+spring:
+  datasource:
+    url: jdbc:postgresql://ec2-54-159-138-67.compute-1.amazonaws.com:5432/d8ve1vh3v5ef77
+    username: eusdavpzedlmwd
+    password: cfd83f54eebe9e70573849b57a62b07c6a984e2a85fefa9f4acb4eee5be9062b
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
