@@ -1,3 +1,4 @@
+package com.example.demo;
 import java.io.IOException;
 import javax.ws.rs.container.ContainerRequestContext;
 import javax.ws.rs.container.ContainerResponseContext;
@@ -13,4 +14,5 @@ public class CORS implements ContainerResponseFilter {
         response.getHeaders().putSingle("Access-Control-Allow-Methods", "OPTIONS, GET, POST, PUT, DELETE");
         response.getHeaders().putSingle("Access-Control-Allow-Headers", "Content-Type");
     }
+
 }
