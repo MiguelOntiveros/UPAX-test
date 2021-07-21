@@ -20,4 +20,9 @@ public class JobController {
 	public String getAll(Integer job_id){
 		return jobRepository.getJob(job_id);
 	}
+	
+	@GetMapping("/salary")
+	public Integer getSalary(Integer job_id){
+		return jobRepository.getSalary(job_id);
+	}
 }

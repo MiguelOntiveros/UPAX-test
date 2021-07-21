@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.entity.Hour;
+import com.example.demo.entity.Pay;
 import com.example.demo.repository.EmployeeWorkedHourRepository;
 import com.example.demo.service.EmployeeWorkedHourService;
 
@@ -24,9 +25,16 @@ public class EmployeeWorkedHourController {
 	@Autowired
 	EmployeeWorkedHourService employeeWorkedHourService;
 	
+	//Web Service 4
 	@GetMapping("/worked-hours")
 	public Hour getEmployees(@RequestParam("employee_id") Integer employee_id, @RequestParam("firstDate") Date firstDate, @RequestParam("secondDate") Date secondDate) {
 		return employeeWorkedHourService. getEmployeeWorkedHour(employee_id, firstDate, secondDate );
+	}
+	
+	//Web Service 5
+	@GetMapping("/pay")
+	public Pay getPay(@RequestParam("employee_id") Integer employee_id, @RequestParam("firstDate") Date firstDate, @RequestParam("secondDate") Date secondDate) {
+		return employeeWorkedHourService.getEmployeePayment(employee_id, firstDate, secondDate);
 	}
 	
 }

@@ -27,14 +27,21 @@ public class EmployeeController {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
+	//Web Service 1
 	@PostMapping("/add")
 	public Contrato addEmployee(@RequestBody Employee employee) {
 		return  employeeService.addEmployee(employee);
 	}
 	
+	//Web Service 2
 	@GetMapping("/all")
 	public List<Employee> getEmployees(@RequestParam("job_id") Integer job_id) {
 		return employeeService.getEmployees(job_id);
+	}
+	
+	@GetMapping("/id")
+	public Integer getJobId(@RequestParam("employee_id") Integer employee_id) {
+		return  employeeRepository.getJobId(employee_id);
 	}
 	
 }

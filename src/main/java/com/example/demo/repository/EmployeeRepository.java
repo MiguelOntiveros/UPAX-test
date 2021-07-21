@@ -20,4 +20,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query( value = "SELECT * FROM EMPLOYEES WHERE job_id =:job_id ORDER BY LAST_NAME", 
 			  nativeQuery = true)
 	List<Employee> getEmployees(Integer job_id);
+	
+	@Query( value = "SELECT JOB_ID FROM EMPLOYEES WHERE id =:employee_id ", 
+			  nativeQuery = true)
+	Integer getJobId(Integer employee_id);
 }
