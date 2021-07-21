@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.time.temporal.ChronoUnit;
 import java.util.Date;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -22,7 +25,7 @@ public class EmployeeService {
 	@Autowired
 	JobRepository jobRepository;
 	
-	public Contrato insertEmployee(Employee employee) {
+	public Contrato addEmployee(Employee employee) {
 		Contrato contrato = new Contrato();
 		LocalDate birthday = employee.getBirthdate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Date currentDate = new Date();
@@ -53,6 +56,15 @@ public class EmployeeService {
 			contrato.setSuccess(false);
 			return contrato;
 		}
+	}
+	
+	public List<Employee> getEmployees(Integer job_id) {
+		List<Employee> employeeList = employeeRepository.getEmployees(job_id);
+		Predicate<Employee> filter = employeeLastName -> (employeeList != null);
+		List<Employee> employeeListLambda = employeeList.parallelStream()
+				.filter(filter)
+				.collect(Collectors.toList());
+		return employeeListLambda;
 	}
 
 }
