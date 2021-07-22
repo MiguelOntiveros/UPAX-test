@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.EmployeeWorkedHour;
+import com.example.demo.entity.Hilo;
 import com.example.demo.entity.Hour;
 import com.example.demo.entity.Pay;
 import com.example.demo.repository.EmployeeRepository;
@@ -27,13 +28,13 @@ public class EmployeeWorkedHourService {
 	@Autowired
 	EmployeeRepository employeeRepository;
 	
-	public Hour getEmployeeWorkedHour(Integer employee_id, Date firstDate, Date secondDate){
+	public Hour getEmployeeWorkedHour(Integer employee_id, Date start_date, Date end_date){
 		Hour hour = new Hour();
-		LocalDate firstDateToCompare = firstDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		LocalDate secondDateToCompare = secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate firstDateToCompare = start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate secondDateToCompare = end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Integer totalHours = 0;
 		if( firstDateToCompare.compareTo(secondDateToCompare) < 0 || employee_id != null ) {
-			List<EmployeeWorkedHour> employeeWorkedHourList =  employeeWorkedHourRepository.getEmployees(employee_id, firstDate, secondDate);
+			List<EmployeeWorkedHour> employeeWorkedHourList =  employeeWorkedHourRepository.getEmployees(employee_id, start_date, end_date);
 				for (EmployeeWorkedHour list : employeeWorkedHourList) {
 					totalHours = totalHours + list.getWorked_hours();
 				}
@@ -50,17 +51,17 @@ public class EmployeeWorkedHourService {
 		
 	}
 	
-	public Pay getEmployeePayment(Integer employee_id, Date firstDate, Date secondDate){
+	public Pay getEmployeePayment(Integer employee_id, Date start_date, Date end_date){
 		Pay pay =  new Pay();
 		Integer job_id = employeeRepository.getJobId(employee_id);
 		Integer salary = jobRepository.getSalary(job_id);
 		Integer paymentPerHour = salary / 8;
 		
-		LocalDate firstDateToCompare = firstDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-		LocalDate secondDateToCompare = secondDate.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate firstDateToCompare = start_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		LocalDate secondDateToCompare = end_date.toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
 		Integer totalHours = 0;
 		if( firstDateToCompare.compareTo(secondDateToCompare) < 0 || employee_id != null) {
-			List<EmployeeWorkedHour> employeeWorkedHourList =  employeeWorkedHourRepository.getEmployees(employee_id, firstDate, secondDate);
+			List<EmployeeWorkedHour> employeeWorkedHourList =  employeeWorkedHourRepository.getEmployees(employee_id, start_date, end_date);
 				for (EmployeeWorkedHour list : employeeWorkedHourList) {
 					totalHours = totalHours + list.getWorked_hours();
 				}
@@ -75,6 +76,35 @@ public class EmployeeWorkedHourService {
 			return pay;
 		}
 		
+	}
+	
+	public Hilo getEmployees(Integer employee_id, Date start_date, Date end_date){
+		Hilo hilo = new Hilo();
+		if(employee_id != null){
+			String name = employeeRepository.getNameByEmployeeId(employee_id);
+			String lastName = employeeRepository.getLastNameByEmployeeId(employee_id);
+			Integer job_id = employeeRepository.getJobId(employee_id);
+			Date birthdate = employeeRepository.getbirthdateByEmployeeId(employee_id);
+			hilo.setJob_id(job_id);
+			hilo.setName(name);
+			hilo.setLast_name(lastName);
+			hilo.setBirthdate(birthdate);
+			hilo.setSuccess(true);
+			return hilo;
+		}
+		else {
+			String name = employeeRepository.getNameByEmployeeId(employee_id);
+			String lastName = employeeRepository.getLastNameByEmployeeId(employee_id);
+			Integer job_id = employeeRepository.getJobId(employee_id);
+			Date birthdate = employeeRepository.getbirthdateByEmployeeId(employee_id);
+			hilo.setJob_id(job_id);
+			hilo.setName(name);
+			hilo.setLast_name(lastName);
+			hilo.setBirthdate(birthdate);
+			hilo.setSuccess(false);
+			return hilo;
+		}
+	
 	}
 
 }

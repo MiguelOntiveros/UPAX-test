@@ -39,9 +39,4 @@ public class EmployeeController {
 		return employeeService.getEmployees(job_id);
 	}
 	
-	@GetMapping("/id")
-	public Integer getJobId(@RequestParam("employee_id") Integer employee_id) {
-		return  employeeRepository.getJobId(employee_id);
-	}
-	
 }

@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,4 +25,16 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query( value = "SELECT JOB_ID FROM EMPLOYEES WHERE id =:employee_id ", 
 			  nativeQuery = true)
 	Integer getJobId(Integer employee_id);
+	
+	@Query( value = "SELECT NAME_ FROM EMPLOYEES WHERE id =:employee_id", 
+			  nativeQuery = true)
+	String getNameByEmployeeId(Integer employee_id);
+	
+	@Query( value = "SELECT LAST_NAME FROM EMPLOYEES WHERE id =:employee_id", 
+			  nativeQuery = true)
+	String getLastNameByEmployeeId(Integer employee_id);
+	
+	@Query( value = "SELECT BIRTHDATE FROM EMPLOYEES WHERE id =:employee_id", 
+			  nativeQuery = true)
+	Date getbirthdateByEmployeeId(Integer employee_id);
 }

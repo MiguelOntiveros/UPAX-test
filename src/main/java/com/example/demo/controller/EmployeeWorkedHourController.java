@@ -17,7 +17,7 @@ import com.example.demo.service.EmployeeWorkedHourService;
 @RestController
 @CrossOrigin()
 @RequestMapping("/employeeworkedhour")
-public class EmployeeWorkedHourController {
+public class EmployeeWorkedHourController implements Runnable{
 	
 	@Autowired
 	EmployeeWorkedHourRepository employeeWorkedHourRepository;
@@ -27,14 +27,20 @@ public class EmployeeWorkedHourController {
 	
 	//Web Service 4
 	@GetMapping("/worked-hours")
-	public Hour getEmployees(@RequestParam("employee_id") Integer employee_id, @RequestParam("firstDate") Date firstDate, @RequestParam("secondDate") Date secondDate) {
-		return employeeWorkedHourService. getEmployeeWorkedHour(employee_id, firstDate, secondDate );
+	public Hour getEmployees(@RequestParam("employee_id") Integer employee_id, @RequestParam("start_date") Date start_date, @RequestParam("end_date") Date end_date) {
+		return employeeWorkedHourService. getEmployeeWorkedHour(employee_id, start_date, end_date);
 	}
 	
 	//Web Service 5
 	@GetMapping("/pay")
-	public Pay getPay(@RequestParam("employee_id") Integer employee_id, @RequestParam("firstDate") Date firstDate, @RequestParam("secondDate") Date secondDate) {
-		return employeeWorkedHourService.getEmployeePayment(employee_id, firstDate, secondDate);
+	public Pay getPay(@RequestParam("employee_id") Integer employee_id, @RequestParam("start_date") Date start_date, @RequestParam("end_date") Date end_date) {
+		return employeeWorkedHourService.getEmployeePayment(employee_id, start_date, end_date);
+	}
+
+	@Override
+	public void run() {
+		// TODO Auto-generated method stub
+		
 	}
 	
 }
