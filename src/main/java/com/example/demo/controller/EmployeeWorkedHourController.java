@@ -17,7 +17,7 @@ import com.example.demo.service.EmployeeWorkedHourService;
 @RestController
 @CrossOrigin()
 @RequestMapping("/employeeworkedhour")
-public class EmployeeWorkedHourController implements Runnable{
+public class EmployeeWorkedHourController{
 	
 	@Autowired
 	EmployeeWorkedHourRepository employeeWorkedHourRepository;
@@ -35,12 +35,6 @@ public class EmployeeWorkedHourController implements Runnable{
 	@GetMapping("/pay")
 	public Pay getPay(@RequestParam("employee_id") Integer employee_id, @RequestParam("start_date") Date start_date, @RequestParam("end_date") Date end_date) {
 		return employeeWorkedHourService.getEmployeePayment(employee_id, start_date, end_date);
-	}
-
-	@Override
-	public void run() {
-		// TODO Auto-generated method stub
-		
 	}
 	
 }

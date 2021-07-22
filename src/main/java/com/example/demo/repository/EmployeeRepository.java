@@ -37,4 +37,8 @@ public interface EmployeeRepository extends JpaRepository<Employee, Long> {
 	@Query( value = "SELECT BIRTHDATE FROM EMPLOYEES WHERE id =:employee_id", 
 			  nativeQuery = true)
 	Date getbirthdateByEmployeeId(Integer employee_id);
+	
+	@Query( value = "SELECT GENDER_ID FROM EMPLOYEES WHERE id =:employee_id", 
+			  nativeQuery = true)
+	Integer getGenderIdByEmployeeId(Integer employee_id);
 }

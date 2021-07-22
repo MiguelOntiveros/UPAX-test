@@ -85,6 +85,8 @@ public class EmployeeWorkedHourService {
 			String lastName = employeeRepository.getLastNameByEmployeeId(employee_id);
 			Integer job_id = employeeRepository.getJobId(employee_id);
 			Date birthdate = employeeRepository.getbirthdateByEmployeeId(employee_id);
+			Integer gender_id = employeeRepository.getGenderIdByEmployeeId(employee_id);
+			hilo.setGender_id(gender_id);
 			hilo.setJob_id(job_id);
 			hilo.setName(name);
 			hilo.setLast_name(lastName);
@@ -97,6 +99,8 @@ public class EmployeeWorkedHourService {
 			String lastName = employeeRepository.getLastNameByEmployeeId(employee_id);
 			Integer job_id = employeeRepository.getJobId(employee_id);
 			Date birthdate = employeeRepository.getbirthdateByEmployeeId(employee_id);
+			Integer gender_id = employeeRepository.getGenderIdByEmployeeId(employee_id);
+			hilo.setGender_id(gender_id);
 			hilo.setJob_id(job_id);
 			hilo.setName(name);
 			hilo.setLast_name(lastName);
